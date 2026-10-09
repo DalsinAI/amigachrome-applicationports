@@ -59,17 +59,12 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | OpenRecorder | Video / Capture | Screen and audio capture | NEW APPLICATION | AROS Ports contains ScreenRecorder; OpenMedia already targets encode services | Native screen/audio capture recorder using ACRTG/OpenAudio/OpenMedia | P1 | Capture AC090 display + audio and encode one clip |
 | GrafX2 | Graphics / Paint | Pixel art and bitmap graphics creation | REVIVAL CANDIDATE | AROS Ports has 2.9 patch; OS4/MorphOS ports exist | Native pixel-art/paint app using OpenGPU/OpenInput | P1 | Clean GCC16/OpenGPU build |
 | LodePaint | Graphics / Paint | General image editing | REVIVAL CANDIDATE | AROS Ports contains port | Assess lightweight image editor role | P2 | Current-source and dependency review |
-| ZunePaint | Graphics / Paint | General image editing | PRIOR ART / REVIVAL OPTION | AROS Ports contains port | Mine native Amiga UI ideas; consider revival if useful beside GrafX2 | P2 | Feature/source review |
-| ZuneView | Graphics / Viewer | Image viewing | PRIOR ART / REVIVAL OPTION | AROS Ports contains port | Lightweight image viewer candidate | P2 | Source review and OpenGFX/OpenGPU mapping |
 | ImageMagick | Graphics / Processing | Scripted/batch image manipulation | REVIVAL CANDIDATE | AmigaOS 4 binary/source port exists | Native CLI image-processing suite | P1 | Recover portability changes and build a small command subset |
-| GraphicsMagick | Graphics / Processing | Scripted/batch image manipulation | CANDIDATE | No confirmed Amiga-family port in current sweep | Alternative lighter image-processing suite | P2 | Compare footprint/build complexity with ImageMagick |
 | Netpbm | Graphics / Processing | Format conversion and simple image processing | REVIVAL CANDIDATE | AROS Contrib port exists | CLI image conversion toolkit | P1 | GCC16 clean build |
 | Potrace | Graphics / Vectorisation | Bitmap-to-vector conversion | REVIVAL CANDIDATE | AROS Ports port exists | Bitmap-to-vector CLI utility | P1 | GCC16 clean build and SVG/EPS output test |
-| POV-Ray | 3D / Rendering | Offline 3D rendering | REVIVAL CANDIDATE | AROS Contrib port exists | Useful renderer and CPU/OpenMulticore benchmark | P2 | Recover build, render reference scene |
-| c-ray | 3D / Rendering | Lightweight rendering/benchmarking | REVIVAL CANDIDATE | AROS Contrib source exists | Small renderer/benchmark | P2 | GCC16 build and reference image |
-| XaoS | Graphics / Visualisation | Interactive mathematical visualisation | REVIVAL CANDIDATE | AROS Contrib port exists | Lightweight graphics/compute showcase | P2 | Clean build and interactive runtime |
+| VectorInk / Method Draw lineage | Graphics / Vector Editing | Create and edit SVG artwork, logos, diagrams and icons without another platform | REVIVAL / ENGINE CANDIDATE | MorphOS VectorInk 1.1 is based on Method Draw/SVG-edit and proves the workflow on an Amiga-family OS | Prefer the permissive SVG-edit/Method Draw core or equivalent portable logic with an AmigaChrome/OpenBrowser-friendly or OpenGadTools shell; do not import a heavyweight GTK stack | P1 | Recover exact source/provenance used by VectorInk, test it in OpenBrowser, then decide web-shell versus native OpenGadTools wrapper |
+| POV-Ray | 3D / Rendering | Offline 3D rendering | REVIVAL CANDIDATE | AROS Contrib port exists | Offline renderer and strong 64-192-core OpenMulticore workload; preserve CLI/batch use and add Open-family integration only where useful | P1 | Recover AROS build, render reference scene, then measure tiled/scene parallelism through OpenMulticore |
 | Blender 2.4x lineage | 3D / Authoring | 3D modelling/authoring reference path | PRIOR ART / STRETCH | AmigaOS 4 Blender 2.48 lineage exists | Historical source/portability reference; not the immediate 3D authoring target | P3 | Study OS4 changes and decide if a scoped legacy Blender revival has value |
-| GIMP lineage | Graphics / Editing | Advanced image-editing reference path | PRIOR ART / STRETCH | AmigaOS 4 ran GIMP through AmiCygnix/X11 | Mine feature expectations only; avoid adopting X11/Cygnix as Open app architecture | PARK | No work until a native UI/engine strategy exists |
 | MUIbase | Office / Database | Desktop database work / OpenBase prior art | PRIOR ART | AROS Ports has MUIbase 3.3 patch | Feed lessons into OpenBase rather than create a competing product | P2 | Compare data model/UI/import features with OpenBase design |
 | AROSPDF / VPDF | Documents / PDF | PDF viewing | PRIOR ART / CANDIDATE | AROS Contrib contains both | PDF viewing/printing prior art | P2 | Decide whether to revive or build around existing OpenPrint/document stack |
 | Text2PDF | Documents / PDF | Generate PDF from text | REVIVAL CANDIDATE | AROS Contrib port exists | Small OpenPrint companion utility | P2 | GCC16 build and print/export smoke |
@@ -79,6 +74,13 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | GOCR | Documents / OCR | OCR from scanned/bitmap documents | REVIVAL CANDIDATE | AROS Ports port exists | Lightweight OCR utility | P2 | GCC16 build and simple OCR sample |
 | Mathomatic | Scientific / Maths | Symbolic mathematics | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | P3 | Clean build |
 | OpenAL / freealut | Audio / Compatibility | Compatibility for ports needing OpenAL-style APIs | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | P3 | Use only where it materially reduces port cost |
+
+### Graphics product rule
+
+- **OpenView/DataTypes own viewing**, so a separate image-viewer port is not maintained here.
+- Prefer **one strong tool per workflow** over multiple overlapping paint/processing packages.
+- Vector editing is a real workflow gap; MorphOS VectorInk/Method Draw prior art is preferred over carrying a heavyweight modern GTK/Qt desktop stack onto 68k.
+- Offline rendering is especially valuable on AmigaChrome because OpenMulticore can expose the expected 64-192 host cores.
 
 ### Media playback ownership
 
