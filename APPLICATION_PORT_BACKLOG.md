@@ -46,8 +46,10 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | FLAC tools / libFLAC | Audio / Codecs | Lossless audio encode/decode | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and CLI encode/decode smoke |
 | Ogg / Vorbis tools | Audio / Codecs | Ogg/Vorbis audio encode/decode | PORT PRIOR ART | AROS Contrib ports exist | Native codec/tool foundation | P0 | GCC16 clean build and round-trip test |
 | Opus tools / libopus | Audio / Codecs | Modern speech/music audio encode/decode | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and encode/decode smoke |
+| LAME / libmp3lame | Audio / Codecs | Encode MP3 locally for compatibility and distribution | REVIVAL CANDIDATE | Current LAME upstream explicitly lists AmigaOS among supported platforms | Native GCC16 encoder/library; expose batch jobs through OpenMulticore where worthwhile | P1 | Pin LAME 4.x source and reproduce a clean m68k build |
+| mpg123 / libmpg123 | Audio / Codecs | Decode and inspect MP3 with a small dedicated native library/tool | REVIVAL CANDIDATE | Historical AROS multimedia code contains mpg123-derived decoder work; current upstream is actively maintained | Lightweight MP3 decoder/player library; prefer OpenAudio output | P2 | Pin current source, integer/floating-point build comparison and OpenAudio smoke test |
 | FAAD2 / AAC decode | Audio / Codecs | AAC audio playback/processing | PORT PRIOR ART | AROS Contrib port exists | Codec foundation | P1 | Clean build and decode test |
-| Speex | Audio / Codecs | Speech audio processing | PORT PRIOR ART | AROS Contrib port exists | Codec / voice utility foundation | P2 | Clean build and smoke |
+| Speex | Audio / Codecs | Speech audio processing | COMPATIBILITY DEPENDENCY | AROS Contrib port exists | Keep available for ports/content that explicitly need Speex; do not treat as a headline application | P3 | Build only when a consuming port requires it |
 | Theora | Video / Codecs | Open video decode/encode workflows | PORT PRIOR ART | AROS Contrib port exists | Legacy/open video codec support | P2 | Clean build and sample decode |
 | SoX | Audio / Processing | Audio conversion, DSP and batch processing | REVIVAL CANDIDATE | AROS Contrib has SoX 12.17.4 portability patch | Revive a current SoX; CLI first; later DSP engine for audio editor | P1 | Diff old AROS portability patch against current SoX |
 | OpenAudioEdit | Audio / Editing | Record, trim, repair and edit audio | NEW APPLICATION | No direct Audacity port found in official AROS Contrib/Ports sweep; MorphOS has native audio editor prior art | Audacity-like waveform editor built from portable DSP/audio engines with OpenAudio + OpenGadTools | P1 | Define MVP: record, waveform view, cut/copy/paste, fades, normalize, save/export |
@@ -82,6 +84,18 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | GOCR | Documents / OCR | OCR from scanned/bitmap documents | REVIVAL CANDIDATE | AROS Ports port exists | Lightweight OCR utility | P2 | GCC16 build and simple OCR sample |
 | Mathomatic | Scientific / Maths | Symbolic mathematics | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | P3 | Clean build |
 | OpenAL / freealut | Audio / Compatibility | Compatibility for ports needing OpenAL-style APIs | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | P3 | Use only where it materially reduces port cost |
+
+### Audio codec scope rule
+
+Do not turn every codec supported by FFmpeg into a separate port project. Add a standalone codec/library only when it provides at least one of:
+
+- a materially smaller/lighter native dependency than FFmpeg;
+- a common upstream dependency for several applications;
+- useful native CLI tooling;
+- significantly better encode/decode quality or performance for its format;
+- existing Amiga-family prior art worth reviving.
+
+Formats such as WavPack, ALAC and other less-common codecs should normally be served through FFmpeg unless a consuming application gives us a concrete reason to maintain their native libraries separately.
 
 ## Scale assumption: 64-192 host cores
 
