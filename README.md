@@ -29,3 +29,14 @@ Priority language used by the backlog:
 - **P2** — planned
 - **P3** — stretch
 - **PARK** — research / low return for now
+
+
+## Governing principle
+
+Every port should answer this before work starts:
+
+> **What need does this remove to use another platform for?**
+
+The aim is not to collect ports for their own sake. The aim is to make AmigaChrome capable of completing real workflows end-to-end: media conversion, audio editing, graphics work, document handling, development, publishing, capture, storage and other everyday jobs without requiring a fallback to Linux, Windows, macOS or another machine.
+
+This **platform-substitution value** is a primary prioritisation criterion alongside feasibility, effort, reuse value and Open-family platform value.
