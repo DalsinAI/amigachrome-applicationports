@@ -14,10 +14,29 @@ Priority scale:
 - **P3** — stretch
 - **PARK** — research / low return for now
 
+## Governing porting rule
+
+Application-port work should be preceded by one question:
+
+> **What need does this remove to use another platform for?**
+
+The highest-value ports are the ones that let an AmigaChrome user complete a real task end-to-end without switching to Linux, Windows, macOS or another machine. A port should therefore justify itself in terms of the external workflow it replaces, not merely because the upstream application is technically interesting.
+
+Examples:
+
+- FFmpeg / OpenTranscode -> removes the need to use another platform for media conversion and delivery encoding.
+- OpenAudioEdit / SoX -> removes the need to use another platform for recording, trimming and restoring audio.
+- GrafX2 / image tools -> removes the need to use another platform for creating and processing graphics.
+- OpenRecorder -> removes the need to use another platform for screen and audio capture.
+- Vim / developer tooling -> removes the need to use another platform for editing and maintaining source code.
+- PDF/document tools -> removes the need to use another platform for routine document viewing, conversion and output.
+
+This **platform-substitution value** should be assessed before engineering effort begins.
+
 A successful compile is not a release. RELEASE still requires reproducible provenance, the approved GCC stove, packaging and AC090 runtime qualification.
 
-| Application / tool | Category | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
-|---|---|---|---|---|---|---|
+| Application / tool | Category | Platform need replaced | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
+|---|---|---|---|---|---|---|---|
 | FFmpeg / ffprobe | FOUNDATION CANDIDATE | AROS Contrib has FFmpeg 8.1.2 with an m68k configuration; AmigaOS 4 and MorphOS also have modern FFmpeg ports | Native GCC16 build; feed OpenMedia decode/encode paths; keep CLI tools | P0 | Reproduce AROS m68k build assumptions with the GCC16 stove and inventory patches worth carrying |
 | OpenMedia FFmpeg bridge | DESIGN / PLATFORM CLIENT | AROS FFmpeg prior art plus existing OpenMedia service design | Hardware encode/decode acceleration bridge for FFmpeg clients | P0 | Define AVCodec/AVHWDevice-style boundary to openmedia.library |
 | FLAC tools / libFLAC | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and CLI encode/decode smoke |
@@ -59,6 +78,21 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | GOCR | REVIVAL CANDIDATE | AROS Ports port exists | Lightweight OCR utility | P2 | GCC16 build and simple OCR sample |
 | Mathomatic | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | P3 | Clean build |
 | OpenAL / freealut | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | P3 | Use only where it materially reduces port cost |
+
+## Priority lens
+
+Before assigning engineering time, rank each candidate on:
+
+- **Platform substitution value** — how much it removes the need to use another platform.
+- **User value** — how useful the completed workflow is.
+- **Probability of success** — likelihood of reaching useful first light on AC090.
+- **Reuse value** — whether the port unlocks multiple applications or workflows.
+- **Open-family value** — whether it proves or strengthens OpenMedia, OpenAudio, OpenGPU, OpenInput, OpenMulticore, OpenPrint or related services.
+- **Effort** — engineering and maintenance cost.
+- **Dependency friction** — external libraries/toolchains required first.
+- **Workflow completeness** — whether the result solves the whole user task or only one fragment of it.
+
+A technically impressive port that still forces the user onto another platform to finish the job should normally rank below a smaller port that closes a complete workflow.
 
 ## Standard intake rule
 
