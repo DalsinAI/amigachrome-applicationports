@@ -83,6 +83,25 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | Mathomatic | Scientific / Maths | PARTLY / OPTIONAL | LOW | CREATE / standalone revival if retained | P3 | Symbolic mathematics | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | Clean build |
 | OpenAL / freealut | Audio / Compatibility | PARTLY / OPTIONAL | LOW | FOLD INTO compatibility layer only | P3 | Compatibility for ports needing OpenAL-style APIs | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | Use only where it materially reduces port cost |
 
+## Development environment and server stack
+
+The application roadmap has a dedicated development/server track in [DEVELOPMENT_ENVIRONMENT.md](DEVELOPMENT_ENVIRONMENT.md).
+
+**Objective:** an AmigaChrome instance can edit, build, link, run and serve a real website end-to-end.
+
+This track owns:
+
+- OpenAmigaGCC 16.2 and its fixed toolchain baseline;
+- GNU linker/binutils plus vasm/vlink;
+- GNU Make, CMake, Ninja and pkg-config;
+- debugger and source-control tooling;
+- Lua, Python, PHP and the OpenNode service/runtime model;
+- OpenHTTPD first-light server and OpenApache;
+- OpenSocket, OpenTLS/OpenCrypto, OpenSQLite and OpenCurl integration;
+- service lifecycle, logs, certificates, JSON/compression and server diagnostics.
+
+The first acceptance gate is deliberately small: **serve a static page stored inside an AmigaChrome instance to a browser outside that instance over OpenSocket.** HTTPS and dynamic endpoints follow.
+
 ### Communications ownership
 
 **OpenBrowser**, **OpenMail**, **OpenFTP/OpenFiles** and **OpenPuTTY** already own the main communications workflows:
