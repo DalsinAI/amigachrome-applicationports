@@ -4,7 +4,7 @@ Snapshot date: **9 October 2026**
 
 Primary target: **AmigaChrome AC090 / AmigaOS 3.x / 68040 + FPU**
 
-This is the single application-port backlog for AmigaChrome. It combines fresh candidates with AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art so priority decisions can be made from the whole field.
+This is the single non-game application-port backlog for AmigaChrome. Emulators, emulator frontends and compatibility runtimes live with games in `amigachrome-gameports`. It combines fresh candidates with AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art so priority decisions can be made from the whole field.
 
 Priority scale:
 
@@ -50,16 +50,6 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | XaoS | REVIVAL CANDIDATE | AROS Contrib port exists | Lightweight graphics/compute showcase | P2 | Clean build and interactive runtime |
 | Blender 2.4x lineage | PRIOR ART / STRETCH | AmigaOS 4 Blender 2.48 lineage exists | Historical source/portability reference; not the immediate 3D authoring target | P3 | Study OS4 changes and decide if a scoped legacy Blender revival has value |
 | GIMP lineage | PRIOR ART / STRETCH | AmigaOS 4 ran GIMP through AmiCygnix/X11 | Mine feature expectations only; avoid adopting X11/Cygnix as Open app architecture | PARK | No work until a native UI/engine strategy exists |
-| RetroArch | REVIVAL CANDIDATE | 68k AmigaOS RetroArch 1.20 exists; OS4/MorphOS versions and core packs also exist | Modernise 68k port and map frontend services to OpenGPU/OpenAudio/OpenInput/OpenMulticore | P1 | Acquire 68k port source/patch history and launch one simple libretro core |
-| FinalBurn Neo | REVIVAL CANDIDATE | Current MorphOS SDL2 port exists | Arcade frontend/core candidate, potentially better near-term fit than full modern MAME | P1 | Study MorphOS SDL2 changes and build core/frontend feasibility matrix |
-| MAME | REVIVAL / SCOPING | AROS has old 0.36 RC1 port; classic/MorphOS lineages also exist | Pick an appropriate older/smaller generation or libretro cores; do not assume current monolithic MAME | P2 | Compare MAME 0.106-ish, old AROS/MorphOS code, and libretro core route |
-| ScummVM | REVIVAL CANDIDATE | AROS patches through 2.2.0; classic 68k and modern OS4/MorphOS builds exist | High-value revival; OpenGPU/OpenAudio/OpenInput/filesystem integration | P1 | Start from strongest Amiga-family backend and build a minimal engine set |
-| DOSBox | REVIVAL CANDIDATE | AROS, classic and MorphOS precedent | Native/Open interfaces; investigate interpreter vs dynamic-core options for AC090 | P2 | Review MorphOS native backend and classic RTG/AGA ports |
-| Mednafen | PRIOR ART / CANDIDATE | AmigaOS 4 port includes PlayStation support | Mine portability and PS1 emulator lessons; possibly use selected cores | P2 | Identify reusable backend work and performance characteristics |
-| PCSX-ReARMed (interpreter first) | CANDIDATE | No verified native Amiga-family port found in current sweep | Prefer libretro route under RetroArch; interpreter first, then optimise | P2 | Build interpreter core and run BIOS/homebrew first light |
-| VICE | REVIVAL CANDIDATE | AROS and MorphOS precedent | Core-first under RetroArch unless standalone value justifies more work | P2 | Compare current libretro core with standalone backend effort |
-| mGBA / VBA-M | REVIVAL CANDIDATE | AROS VBA-M and OS4 mGBA precedent | Prefer libretro core route initially | P2 | Compile one core under RetroArch/Open interfaces |
-| E-UAE / UAE family | PRIOR ART / TOOL | AROS Contrib contains E-UAE/UAE | Useful application/emulation prior art; AmigaChrome already has its own guest architecture | PARK | Mine only if a specific subsystem lesson is needed |
 | MUIbase | PRIOR ART | AROS Ports has MUIbase 3.3 patch | Feed lessons into OpenBase rather than create a competing product | P2 | Compare data model/UI/import features with OpenBase design |
 | AROSPDF / VPDF | PRIOR ART / CANDIDATE | AROS Contrib contains both | PDF viewing/printing prior art | P2 | Decide whether to revive or build around existing OpenPrint/document stack |
 | Text2PDF | REVIVAL CANDIDATE | AROS Contrib port exists | Small OpenPrint companion utility | P2 | GCC16 build and print/export smoke |
