@@ -77,7 +77,6 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | FryingPan | Storage / Optical Media | YES | HIGH | CREATE / standalone revival | P1 | Optical-disc mastering, ISO creation and CD/DVD burning without another platform | STRONG REVIVAL CANDIDATE | AROS Contrib source explicitly targets AROS, OS3, MorphOS and OS4; application/supporting libraries are LGPL | Revive on fixed GCC16; map physical-drive access to the Amiga/AmigaChrome optical device/service layer rather than host-specific code | Build OS3 target with GCC16, inventory drive transport assumptions and create/burn a test ISO |
 | xorriso | Storage / Disc Images | YES | MEDIUM | FOLD INTO FryingPan/OpenFiles/Build Lab + keep CLI | P2 | Create, inspect, modify and verify ISO images locally | REVIVAL / BACKEND CANDIDATE | AROS Contrib has a 2026 xorriso 1.5.8 patch; its AROS libburn transport is deliberately dummy/file-only | CLI/file-image backend for FryingPan/OpenFiles/Build Lab where useful; do not claim physical burning until an AmigaChrome MMC transport exists | Reproduce AROS 1.5.8 build on fixed GCC16 and exercise ISO create/list/extract/verify |
 | Vim | Developer / Editor | PARTLY / OPTIONAL | LOW | CREATE / optional standalone revival | P3 | Optional modal/terminal editing for users who specifically want Vim; OpenEdit already covers the core source-editing need | OPTIONAL REVIVAL | AROS Ports port exists | Keep as a compatibility/power-user port, not as the primary AmigaChrome editor | Only revive after OpenEdit/Build Lab workflows are qualified |
-| SSHTerm / OpenSSH client | Communications / Remote Shell | YES | HIGH | CREATE / remote-shell app | P1 | Administer remote Linux/Unix/Amiga systems securely without leaving AmigaChrome | REVIVAL CANDIDATE | AmigaOS 4 has OpenSSH tools and open-source SSHTerm with built-in terminal emulation | Prefer a small interactive SSH client/terminal using OpenSocket + OpenTLS; retain scp/sftp CLI only where they add value beyond OpenFiles | Recover SSHTerm/OpenSSH portability work, fixed-GCC16 build, connect to a modern SSH server and exercise resize/copy/paste/key auth |
 | libgit2 + OpenGit | Developer / Source Control | YES | HIGH | CREATE OpenGit; fold libgit2 underneath | P1 | Clone, branch, diff, commit, fetch, pull and push without leaving AmigaChrome | NEW APPLICATION / LIBRARY PORT | No useful current AROS Git client found in the first sweep; libgit2 is a portable library route that avoids much of full Git's Unix toolchain surface | Port libgit2 on fixed GCC16 and wrap it in a small Amiga CLI/OpenGadTools client using OpenSocket/OpenTLS | Pin libgit2, audit filesystem/TLS/thread assumptions, then clone/status/commit/push a test repository |
 | Lua | Developer / Scripting | YES | MEDIUM | FOLD INTO shared scripting/runtime infrastructure | P1 | Run automation, build helpers and application scripts natively | REVIVAL / FOUNDATION CANDIDATE | AROS Contrib already carries Lua and multiple AROS ports depend on it | Current lightweight Lua interpreter/compiler for GCC16; expose Open-family bindings only when concrete consumers need them | Identify current sensible Lua baseline, reproduce an AROS-derived GCC16 build and run interpreter/module tests |
 | gnuplot | Scientific / Plotting | YES | MEDIUM | CREATE / standalone revival + integrations later | P1 | Plot functions and datasets and export publication-ready graphs without another platform | REVIVAL CANDIDATE | MorphOS has a gnuplot 5.2.2 port; upstream remains portable and CLI-centric | Native CLI first with SVG/PNG/PDF outputs; integrate with OpenWrite/OpenPresent only where useful | Pin current source, recover MorphOS/Amiga portability assumptions, fixed-GCC16 build and plot CSV/function samples |
@@ -86,7 +85,15 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 
 ### Communications ownership
 
-**OpenBrowser**, **OpenMail**, **OpenFTP/OpenFiles** and the OpenSocket/OpenTLS stack already own web, mail and file-transfer workflows. Applicationports should not add duplicate clients unless they close a distinct gap. Interactive **SSH/remote shell** is such a gap.
+**OpenBrowser**, **OpenMail**, **OpenFTP/OpenFiles** and **OpenPuTTY** already own the main communications workflows:
+
+- web browsing -> OpenBrowser;
+- mail -> OpenMail;
+- file transfer -> OpenFTP/OpenFiles;
+- SSH, Telnet, raw and serial terminal access -> OpenPuTTY;
+- networking and secure transport -> OpenSocket/OpenTLS/OpenCrypto.
+
+OpenPuTTY is already a working AmigaOS 3.2.x application and should remain the remote-shell/terminal product. Applicationports should not create a competing SSH terminal unless a genuinely distinct workflow emerges.
 
 ### Missing-workflow rule
 
