@@ -52,8 +52,9 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | Speex | Audio / Codecs | Speech audio processing | COMPATIBILITY DEPENDENCY | AROS Contrib port exists | Keep available for ports/content that explicitly need Speex; do not treat as a headline application | P3 | Build only when a consuming port requires it |
 | Theora | Video / Codecs | Open video decode/encode workflows | PORT PRIOR ART | AROS Contrib port exists | Legacy/open video codec support | P2 | Clean build and sample decode |
 | SoX | Audio / Processing | Audio conversion, DSP and batch processing | REVIVAL CANDIDATE | AROS Contrib has SoX 12.17.4 portability patch | Revive a current SoX; CLI first; later DSP engine for audio editor | P1 | Diff old AROS portability patch against current SoX |
+| SoundTouch | Audio / Processing | Change tempo, pitch and playback rate without leaving AmigaChrome | CANDIDATE | Portable LGPL C++ library; upstream designed for cross-platform and embedded use | Shared OpenAudioEdit processing library; parallelise offline/batch jobs where useful | P2 | Pin source, GCC16 build and reference quality/performance test |
+| RNNoise | Audio / Processing | Speech/noise cleanup without an external workstation | CANDIDATE | BSD-licensed reusable Xiph noise-suppression library | OpenAudioEdit/OpenAudio processing backend; prefer host-side/OpenMulticore execution for expensive inference | P2 | Prove portable scalar build, define offload boundary and process a reference WAV |
 | OpenAudioEdit | Audio / Editing | Record, trim, repair and edit audio | NEW APPLICATION | No direct Audacity port found in official AROS Contrib/Ports sweep; MorphOS has native audio editor prior art | Audacity-like waveform editor built from portable DSP/audio engines with OpenAudio + OpenGadTools | P1 | Define MVP: record, waveform view, cut/copy/paste, fades, normalize, save/export |
-| Audacity | Audio / Editing | Reference feature set for richer audio editing | INVESTIGATE | No verified AROS/Aminet/OS4/MorphOS port found in current sweep | Mine algorithms/workflows; avoid dragging current desktop GUI stack onto 68k unless proven sensible | P3 | Dependency audit and identify reusable non-UI components |
 | MilkyTracker | Music / Tracker | Tracker music creation and module editing | REVIVAL CANDIDATE | AROS Ports has 1.05.01 recipe; OS4 and MorphOS ports also exist | Rebuild on OpenGPU/OpenAudio/OpenInput; keep tracker UI | P1 | Import AROS patch set, clean GCC16 build, audio first light |
 | Radium | Music / Tracker | Advanced music composition/tracker workflow | INVESTIGATE | Present in AROS Contrib | Assess as higher-end tracker/music workstation | P2 | Licence/dependency/current-upstream review |
 | OpenTranscode | Video / Transcoding | Video conversion, resizing, codec/container delivery jobs | NEW APPLICATION | OS4 FFmpegGUI / VideoClipper style prior art proves GUI-over-FFmpeg model | Native OpenGadTools transcoder using FFmpeg + OpenMedia hardware acceleration | P1 | UI/job model and one H.264 -> H.265 hardware-assisted transcode proof |
@@ -84,6 +85,10 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | GOCR | Documents / OCR | OCR from scanned/bitmap documents | REVIVAL CANDIDATE | AROS Ports port exists | Lightweight OCR utility | P2 | GCC16 build and simple OCR sample |
 | Mathomatic | Scientific / Maths | Symbolic mathematics | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | P3 | Clean build |
 | OpenAL / freealut | Audio / Compatibility | Compatibility for ports needing OpenAL-style APIs | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | P3 | Use only where it materially reduces port cost |
+
+### Audio editing product rule
+
+**OpenAudioEdit** is the shipping audio-editor target. Audacity is a workflow and feature reference, not a port target. Reuse portable algorithms/libraries where licences and architecture make sense, but do not import a heavyweight desktop GUI/toolkit merely to preserve the Audacity application shell.
 
 ### Audio codec scope rule
 
