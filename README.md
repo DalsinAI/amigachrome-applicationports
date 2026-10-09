@@ -9,3 +9,23 @@ None yet.
 ## Licences
 
 Each port keeps the licence of the program it ports, recorded beside it. The Team's own build scripts and patches are MIT licensed and free, Copyright (c) 2026 Dalsin Limited.
+
+
+## Working documents
+
+- [APPLICATION_PORT_BACKLOG.md](APPLICATION_PORT_BACKLOG.md) — unified application backlog and priority board.
+- [PRIOR_ART.md](PRIOR_ART.md) — AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art worth mining before starting fresh portability work.
+
+## Porting rule
+
+Before writing new Amiga portability code, check AROS Contrib/Ports, Aminet, OS4Depot and MorphOS Storage first. Prefer recovering proven Amiga-family work and replacing obsolete platform glue with Open-family interfaces over solving the same problem again.
+
+Primary AmigaChrome target: **AC090 / AmigaOS 3.x / 68040 + FPU**.
+
+Priority language used by the backlog:
+
+- **P0** — finish / enable now
+- **P1** — next delivery wave
+- **P2** — planned
+- **P3** — stretch
+- **PARK** — research / low return for now
