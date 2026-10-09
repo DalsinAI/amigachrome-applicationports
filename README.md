@@ -40,3 +40,10 @@ Every port should answer this before work starts:
 The aim is not to collect ports for their own sake. The aim is to make AmigaChrome capable of completing real workflows end-to-end: media conversion, audio editing, graphics work, document handling, development, publishing, capture, storage and other everyday jobs without requiring a fallback to Linux, Windows, macOS or another machine.
 
 This **platform-substitution value** is a primary prioritisation criterion alongside feasibility, effort, reuse value and Open-family platform value.
+
+
+## Scale assumption
+
+AmigaChrome application ports should assume a surrounding host environment with **64 to 192 CPU cores** available through OpenMulticore.
+
+Ports should preserve AmigaOS semantics at the application boundary while allowing suitable workloads to scale underneath. Existing pthreads, worker pools, task graphs and job queues should be mapped to OpenMulticore where practical. Embarrassingly parallel work such as transcoding, rendering, audio analysis, compression, OCR, image processing and builds should be able to use the wider host rather than being artificially serialised.
