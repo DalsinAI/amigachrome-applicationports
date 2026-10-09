@@ -13,6 +13,8 @@ Each port keeps the licence of the program it ports, recorded beside it. The Tea
 
 ## Working documents
 
+- [DEVELOPMENT_ENVIRONMENT.md](DEVELOPMENT_ENVIRONMENT.md) — GCC/linkers/assemblers/build tools plus the web/server runtime stack; objective: an AmigaChrome instance can build and run a website.
+
 - [APPLICATION_PORT_BACKLOG.md](APPLICATION_PORT_BACKLOG.md) — unified application backlog and priority board.
 - [PRIOR_ART.md](PRIOR_ART.md) — AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art worth mining before starting fresh portability work.
 
