@@ -37,20 +37,11 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 
 | Application / tool | Category | Platform need replaced | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
 |---|---|---|---|---|---|---|---|
-| FFmpeg / ffprobe | Media Infrastructure | Media conversion, probing and scripted media processing | FOUNDATION CANDIDATE | AROS Contrib has FFmpeg 8.1.2 with an m68k configuration; AmigaOS 4 and MorphOS also have modern FFmpeg ports | Native GCC16 build; feed OpenMedia decode/encode paths; keep CLI tools | P0 | Reproduce AROS m68k build assumptions with the GCC16 stove and inventory patches worth carrying |
-| OpenMedia FFmpeg bridge | Media Infrastructure | Hardware-assisted media encode/decode without leaving AmigaChrome | DESIGN / PLATFORM CLIENT | AROS FFmpeg prior art plus existing OpenMedia service design | Hardware encode/decode acceleration bridge for FFmpeg clients | P0 | Define AVCodec/AVHWDevice-style boundary to openmedia.library |
-| MediaInfo / libmediainfo | Media Infrastructure | Inspect codecs, containers, streams and media metadata without another platform | CANDIDATE | Cross-platform upstream; Amiga-family prior art to be checked during intake | Native CLI/library; integrate with OpenTranscode and file/media browsers | P1 | Pin source, dependency audit and GCC16 build |
+| FFmpeg / ffprobe | Media Infrastructure | Media conversion, probing, filtering and scripted processing beyond datatype playback | FOUNDATION CANDIDATE | AROS Contrib has FFmpeg 8.1.2 with an m68k configuration; AmigaOS 4 and MorphOS also have modern FFmpeg ports | Keep CLI tools and libraries as creation/editing/transcoding infrastructure; OpenMedia owns hardware codec acceleration and DataTypes own routine playback/viewing | P0 | Reproduce the AROS m68k build with the fixed GCC16 baseline, then define the clean OpenMedia acceleration boundary |
+| MediaInfo / libmediainfo | Media Infrastructure | Inspect codecs, containers, streams and media metadata beyond current datatype probe fields | CANDIDATE / POSSIBLE THIN TOOL | Cross-platform upstream; existing media.decode/1 PROBE already supplies basic kind/format/frame/size/rate metadata | First assess extending OpenMedia/OpenService probe metadata; port libmediainfo only if that is materially better | P2 | Gap analysis against media.decode/1 PROBE and OpenPlay About-this-file before importing a new dependency |
 | TagLib | Media Infrastructure | Read/write common audio metadata and tags locally | CANDIDATE | Cross-platform upstream; Amiga-family prior art to be checked during intake | Shared metadata library for players, editors and music tools | P2 | Pin source and GCC16 library build |
 | libsndfile | Media Infrastructure | Common PCM/audio-file I/O for editors, converters and analysis tools | CANDIDATE | Cross-platform upstream; Amiga-family prior art to be checked during intake | Shared audio-file library beneath OpenAudioEdit and utilities | P1 | Pin source, supported-format audit and GCC16 build |
 | libsamplerate | Media Infrastructure | High-quality sample-rate conversion without external tooling | CANDIDATE | Cross-platform upstream; Amiga-family prior art to be checked during intake | Shared resampling engine; expose OpenMulticore for batch/offline work where useful | P1 | Pin source, GCC16 build and quality/performance test |
-| FLAC tools / libFLAC | Audio / Codecs | Lossless audio encode/decode | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and CLI encode/decode smoke |
-| Ogg / Vorbis tools | Audio / Codecs | Ogg/Vorbis audio encode/decode | PORT PRIOR ART | AROS Contrib ports exist | Native codec/tool foundation | P0 | GCC16 clean build and round-trip test |
-| Opus tools / libopus | Audio / Codecs | Modern speech/music audio encode/decode | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and encode/decode smoke |
-| LAME / libmp3lame | Audio / Codecs | Encode MP3 locally for compatibility and distribution | REVIVAL CANDIDATE | Current LAME upstream explicitly lists AmigaOS among supported platforms | Native GCC16 encoder/library; expose batch jobs through OpenMulticore where worthwhile | P1 | Pin LAME 4.x source and reproduce a clean m68k build |
-| mpg123 / libmpg123 | Audio / Codecs | Decode and inspect MP3 with a small dedicated native library/tool | REVIVAL CANDIDATE | Historical AROS multimedia code contains mpg123-derived decoder work; current upstream is actively maintained | Lightweight MP3 decoder/player library; prefer OpenAudio output | P2 | Pin current source, integer/floating-point build comparison and OpenAudio smoke test |
-| FAAD2 / AAC decode | Audio / Codecs | AAC audio playback/processing | PORT PRIOR ART | AROS Contrib port exists | Codec foundation | P1 | Clean build and decode test |
-| Speex | Audio / Codecs | Speech audio processing | COMPATIBILITY DEPENDENCY | AROS Contrib port exists | Keep available for ports/content that explicitly need Speex; do not treat as a headline application | P3 | Build only when a consuming port requires it |
-| Theora | Video / Codecs | Open video decode/encode workflows | COMPATIBILITY DEPENDENCY | AROS Contrib port exists | Keep available when a consuming port requires libtheora; FFmpeg/OpenMedia own the normal user video workflow | P3 | Build only when a consuming port requires it |
 | SoX | Audio / Processing | Audio conversion, DSP and batch processing | REVIVAL CANDIDATE | AROS Contrib has SoX 12.17.4 portability patch | Revive a current SoX; CLI first; later DSP engine for audio editor | P1 | Diff old AROS portability patch against current SoX |
 | SoundTouch | Audio / Processing | Change tempo, pitch and playback rate without leaving AmigaChrome | CANDIDATE | Portable LGPL C++ library; upstream designed for cross-platform and embedded use | Shared OpenAudioEdit processing library; parallelise offline/batch jobs where useful | P2 | Pin source, GCC16 build and reference quality/performance test |
 | RNNoise | Audio / Processing | Speech/noise cleanup without an external workstation | CANDIDATE | BSD-licensed reusable Xiph noise-suppression library | OpenAudioEdit/OpenAudio processing backend; prefer host-side/OpenMulticore execution for expensive inference | P2 | Prove portable scalar build, define offload boundary and process a reference WAV |
@@ -109,6 +100,21 @@ Do not turn every codec supported by FFmpeg into a separate port project. Add a 
 - existing Amiga-family prior art worth reviving.
 
 Formats such as WavPack, ALAC and other less-common codecs should normally be served through FFmpeg unless a consuming application gives us a concrete reason to maintain their native libraries separately.
+
+## Platform ownership: OpenMedia and DataTypes
+
+Before adding a media port, check whether the requirement is already satisfied by the AmigaChrome media platform:
+
+- **OpenMedia** owns hardware video codec sessions and zero-copy surfaces: H.264, HEVC, VP9, AV1, MPEG-2, VC-1 and JPEG, with decode/encode capability depending on the provider.
+- **OpenAmigaMediaLibrary** already has working AC090-tested libwebp 1.6.0 and libvpx 1.17.0 decoder builds.
+- **openpicture.datatype** covers AVIF, HEIC/HEIF, JPEG XL, RAW, PSD, XCF, EXR, HDR, QOI, DDS, JPEG 2000, OpenRaster, Krita, CBZ, SVG and more through `media.decode/1`.
+- **opensound.datatype** covers FLAC, Ogg/Vorbis, Opus, AAC/M4A, ALAC, WMA, MP3, MIDI, SID and module formats through `media.decode/1`.
+- **openmodule.datatype** plays module formats locally using libxmp, with an OpenMulticore/offload ladder.
+- **openvideo.datatype** covers MP4/MOV, MKV, AVI, WMV, MPEG, FLV and APNG through `media.decode/1`.
+- **webp.datatype** and **webm.datatype** provide local WebP and VP8/VP9 paths.
+- **OpenPlay** is already the user-facing datatype-driven media player.
+
+Therefore, a codec/library does **not** get a standalone application-port row merely because a media format exists. Add it only when creation/editing/encoding, a concrete consuming application, or a material performance/compatibility reason requires a native library.
 
 ## Scale assumption: 64-192 host cores
 
