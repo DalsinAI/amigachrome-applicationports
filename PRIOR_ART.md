@@ -64,16 +64,7 @@ Confirmed AROS application prior art includes:
 
 ### Emulation
 
-Confirmed AROS emulation prior art includes:
-
-- **MAME 0.36 RC1** — very old, but useful as evidence of a small-generation MAME port on an Amiga-family OS.
-- **DOSBox**
-- **ScummVM** — AROS patch history includes 1.8.0, 1.9.0 and 2.2.0.
-- **VBA-M**
-- **VICE**
-- **E-UAE / UAE**
-
-The old AROS MAME README is particularly interesting because it documents platform constraints directly: 8-bit rendering assumptions, manual frameskip and substantial memory use. It should be treated as architectural archaeology, not as our release target.
+Emulator and emulator-frontend prior art is maintained in `DalsinAI/amigachrome-gameports/EMULATOR_PRIOR_ART.md`. Emulators are treated as part of the games catalogue rather than the productivity/application backlog.
 
 ## Aminet / classic AmigaOS
 
@@ -81,17 +72,7 @@ The classic 68k ecosystem is the most important prior-art source when code or pa
 
 High-value discoveries from the current sweep:
 
-- **RetroArch 1.20 for 68k AmigaOS**
-  - frontend already ported to classic AmigaOS;
-  - separate cores available;
-  - dramatically reduces uncertainty around a RetroArch revival.
-- **ScummVM 2.5.1 AGA/68060 lineage**
-  - confirms a much newer ScummVM generation has run on classic 68k than the AROS patch history alone suggests.
-- **MAME 0.106 MiniMix lineage**
-  - potentially a much more appropriate AC090 starting generation than current monolithic MAME.
-- **DOSBox** classic Amiga RTG/AGA lineages.
 - **FFmpeg** classic m68k history.
-- **Amico8 / PICO-8 style emulator** on 020+ AmigaOS.
 
 For classic ports, source availability must be checked carefully. A binary package is useful evidence but not automatically reusable implementation work.
 
@@ -105,9 +86,6 @@ High-value findings:
 - **FFmpegGUI** — proves the small-native-GUI-over-FFmpeg application pattern.
 - **VideoClipper** — another useful FFmpeg-driven workflow/UI reference.
 - **MilkyTracker** SDL2 lineage.
-- **ScummVM 2026.2.0** with a large engine set.
-- **Mednafen** including Sony PlayStation support.
-- **mGBA**.
 - **ImageMagick 6.8.9** binary/source port lineage.
 - **Blender 2.48** lineage.
 - **GIMP 2.6** via AmiCygnix/X11.
@@ -121,66 +99,17 @@ MorphOS is especially valuable for maintained SDL2/OpenGL/FFmpeg-era application
 
 High-value findings:
 
-- **FinalBurn Neo**
-  - current MorphOS SDL2 port;
-  - strong arcade-emulation candidate;
-  - likely better near-term return than attempting full modern MAME.
-- **ScummVM 2026.3.0**
-  - modern dependency stack including SDL2, FluidSynth, FLAC, Theora, FAAD, VPX and MikMod.
 - **MPlayer 1.5.2 / FFmpeg 6.1.6 lineage**
   - valuable source of Amiga-family video/audio/output portability ideas.
 - **GrafX2 2.9**
   - current-ish graphics application precedent.
 - **MilkyTracker 1.05**
   - corroborates AROS/OS4 tracker portability.
-- **MAME 0.148**
-  - native MUI-oriented port with non-SDL architecture;
-  - useful backend/UI reference even if we choose a different MAME core generation.
-- **DOSBox**
-  - native backend/JIT work worth studying.
-- **FPSE**
-  - PlayStation emulator evidence; code reuse depends on licence/source availability.
 - native audio-editor applications such as **WaveEdit / SoundFX** for UI/feature reference.
 
 ## Implications for AmigaChrome
 
-### RetroArch
-
-Status should be **revive/adapt**, not greenfield port.
-
-Best route:
-
-1. recover classic 68k frontend portability work;
-2. modernise against a suitable current RetroArch baseline;
-3. replace historical video/audio/input/threading glue with:
-   - OpenGPU
-   - OpenAudio
-   - OpenInput
-   - OpenMulticore
-4. bring up one lightweight core first;
-5. use the frontend to unlock additional emulator cores.
-
-### Arcade emulation
-
-Do not assume current MAME is the correct first target.
-
-Evaluate three routes:
-
-1. **FinalBurn Neo** via modern MorphOS SDL2 prior art;
-2. **MAME 0.106-ish** via classic 68k prior art;
-3. selected **libretro MAME/FBNeo cores** under RetroArch.
-
-Current full MAME can remain a later capability target.
-
-### PlayStation
-
-Use RetroArch as the preferred frontend layer.
-
-Candidates:
-
-- PCSX-ReARMed interpreter core;
-- Mednafen PSX knowledge from OS4;
-- FPSE only as behavioural/performance prior art unless its source/licence permits more.
+Emulator-specific implications and platform strategy live in `DalsinAI/amigachrome-gameports/EMULATOR_PRIOR_ART.md`.
 
 ### FFmpeg / transcoding
 
