@@ -4,7 +4,7 @@ Snapshot date: **9 October 2026**
 
 Primary target: **AmigaChrome AC090 / AmigaOS 3.x / 68040 + FPU**
 
-This is the single non-game application-port backlog for AmigaChrome. Emulators, emulator frontends and compatibility runtimes live with games in `amigachrome-gameports`. It combines fresh candidates with AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art so priority decisions can be made from the whole field.
+This is the single non-game application-port backlog for AmigaChrome. The **Category** column groups ports by application type so the catalogue can be reviewed by domain as well as priority. Emulators, emulator frontends and compatibility runtimes live with games in `amigachrome-gameports`. It combines fresh candidates with AROS, classic AmigaOS, AmigaOS 4 and MorphOS prior art so priority decisions can be made from the whole field.
 
 Priority scale:
 
@@ -16,8 +16,8 @@ Priority scale:
 
 A successful compile is not a release. RELEASE still requires reproducible provenance, the approved GCC stove, packaging and AC090 runtime qualification.
 
-| Application / tool | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
-|---|---|---|---|---|---|
+| Application / tool | Category | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
+|---|---|---|---|---|---|---|
 | FFmpeg / ffprobe | FOUNDATION CANDIDATE | AROS Contrib has FFmpeg 8.1.2 with an m68k configuration; AmigaOS 4 and MorphOS also have modern FFmpeg ports | Native GCC16 build; feed OpenMedia decode/encode paths; keep CLI tools | P0 | Reproduce AROS m68k build assumptions with the GCC16 stove and inventory patches worth carrying |
 | OpenMedia FFmpeg bridge | DESIGN / PLATFORM CLIENT | AROS FFmpeg prior art plus existing OpenMedia service design | Hardware encode/decode acceleration bridge for FFmpeg clients | P0 | Define AVCodec/AVHWDevice-style boundary to openmedia.library |
 | FLAC tools / libFLAC | PORT PRIOR ART | AROS Contrib port exists | Native codec/tool foundation | P0 | GCC16 clean build and CLI encode/decode smoke |
