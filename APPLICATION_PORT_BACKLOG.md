@@ -35,8 +35,8 @@ This **platform-substitution value** should be assessed before engineering effor
 
 A successful compile is not a release. RELEASE still requires reproducible provenance, the approved GCC stove, packaging and AC090 runtime qualification.
 
-| Application / tool | Category | Create / Fold Into | Platform need replaced | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Priority | Next meaningful gate |
-|---|---|---|---|---|---|---|---|---|
+| Application / tool | Category | Removes Need For Another Platform? | Platform Substitution Value | Create / Fold Into | Priority | Platform need replaced | Current state | Amiga-family prior art | Intended AmigaChrome treatment | Next meaningful gate |
+|---|---|---|---|---|---|---|---|---|---|---|
 | FFmpeg / ffprobe | Media Infrastructure | Media conversion, probing, filtering and scripted processing beyond datatype playback | FOUNDATION CANDIDATE | AROS Contrib has FFmpeg 8.1.2 with an m68k configuration; AmigaOS 4 and MorphOS also have modern FFmpeg ports | Keep CLI tools and libraries as creation/editing/transcoding infrastructure; OpenMedia owns hardware codec acceleration and DataTypes own routine playback/viewing | P0 | Reproduce the AROS m68k build with the fixed GCC16 baseline, then define the clean OpenMedia acceleration boundary |
 | MediaInfo / libmediainfo | Media Infrastructure | Inspect codecs, containers, streams and media metadata beyond current datatype probe fields | CANDIDATE / POSSIBLE THIN TOOL | Cross-platform upstream; existing media.decode/1 PROBE already supplies basic kind/format/frame/size/rate metadata | First assess extending OpenMedia/OpenService probe metadata; port libmediainfo only if that is materially better | P2 | Gap analysis against media.decode/1 PROBE and OpenPlay About-this-file before importing a new dependency |
 | TagLib | Media Infrastructure | Read/write common audio metadata and tags locally | CANDIDATE | Cross-platform upstream; Amiga-family prior art to be checked during intake | Shared metadata library for players, editors and music tools | P2 | Pin source and GCC16 library build |
