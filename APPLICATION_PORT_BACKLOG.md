@@ -57,7 +57,6 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | MKVToolNix CLI | Video / Container Tools | Create, alter, inspect and repair Matroska files locally | CANDIDATE | Mature cross-platform CLI suite; Amiga-family prior art to be checked during intake | Port CLI tools first; native GUI only if a real workflow gap remains | P2 | Pin current source, isolate CLI dependencies and build mkvmerge/mkvinfo subset |
 | GPAC / MP4Box | Video / Container Tools | Package, inspect and manipulate MP4/HEIF/DASH/HLS media locally | CANDIDATE | Mature cross-platform media framework/tool suite; Amiga-family prior art to be checked | Start with MP4Box CLI; integrate OpenMedia/FFmpeg only where it materially helps | P2 | Pin current 26.x source and build minimal MP4Box feature set |
 | OpenRecorder | Video / Capture | Screen and audio capture | NEW APPLICATION | AROS Ports contains ScreenRecorder; OpenMedia already targets encode services | Native screen/audio capture recorder using ACRTG/OpenAudio/OpenMedia | P1 | Capture AC090 display + audio and encode one clip |
-| VLC / OpenAmigaVLC | Media / Playback | General-purpose media playback | EXISTING SEPARATE PROJECT | Existing DalsinAI repo; Amiga-family media-player precedent exists | Keep in its own repo; consume OpenMedia | P1 | Continue OpenMedia-backed decode/display qualification |
 | GrafX2 | Graphics / Paint | Pixel art and bitmap graphics creation | REVIVAL CANDIDATE | AROS Ports has 2.9 patch; OS4/MorphOS ports exist | Native pixel-art/paint app using OpenGPU/OpenInput | P1 | Clean GCC16/OpenGPU build |
 | LodePaint | Graphics / Paint | General image editing | REVIVAL CANDIDATE | AROS Ports contains port | Assess lightweight image editor role | P2 | Current-source and dependency review |
 | ZunePaint | Graphics / Paint | General image editing | PRIOR ART / REVIVAL OPTION | AROS Ports contains port | Mine native Amiga UI ideas; consider revival if useful beside GrafX2 | P2 | Feature/source review |
@@ -80,6 +79,10 @@ A successful compile is not a release. RELEASE still requires reproducible prove
 | GOCR | Documents / OCR | OCR from scanned/bitmap documents | REVIVAL CANDIDATE | AROS Ports port exists | Lightweight OCR utility | P2 | GCC16 build and simple OCR sample |
 | Mathomatic | Scientific / Maths | Symbolic mathematics | REVIVAL CANDIDATE | AROS Ports port exists | Scientific/education utility | P3 | Clean build |
 | OpenAL / freealut | Audio / Compatibility | Compatibility for ports needing OpenAL-style APIs | PRIOR ART / COMPATIBILITY | AROS Contrib ports exist | Compatibility option only; OpenAudio remains preferred native target | P3 | Use only where it materially reduces port cost |
+
+### Media playback ownership
+
+Routine media playback is not an application-port backlog item. **OpenPlay** is the native datatype-driven player and **OpenAmigaVLC** is a separate existing project that drives OpenMedia. Applicationports should only add another playback application when it closes a workflow that those two cannot reasonably cover.
 
 ### Video product rule
 
