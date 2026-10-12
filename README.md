@@ -1,5 +1,8 @@
 # AmigaChrome Application Ports
 
+
+**[Unified Port Atlas](https://github.com/DalsinAI/amigachrome/tree/main/docs/porting)** — searchable cross-programme game/application catalogue with existing Amiga-port evidence, source/rights assessment and proposed Open-family acceleration or development benefit. This does not replace the local source pins, build notes or qualification gates.
+
 Open-source application ports and compatibility work for **AmigaOS 3.x**, **m68k AROS** and **AmigaChrome**: the sister of [amigachrome-gameports](https://github.com/DalsinAI/amigachrome-gameports), for programs that are not games.
 
 ## Current port state
